@@ -1,130 +1,22 @@
 import Head from 'next/head'
-import { Layout, Menu } from 'antd'
-import { useResponsive } from '../../components/Media'
-import { useEffect, useState } from 'react'
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from '@ant-design/icons'
-import { IoLogOutOutline, IoCloseSharp } from 'react-icons/io5'
-import { FiMenu } from 'react-icons/fi'
-import classNames from 'classnames'
+import { Row, Typography } from 'antd'
+import MainContainer from '../../components/MainContainer'
 
-const { SubMenu } = Menu
-const { Header, Content, Sider } = Layout
+const { Title } = Typography
 
 export default function ChainPage() {
-  const media = useResponsive()
-  const [isOpenSider, setIsOpenSider] = useState(true)
-  const isSiderCollapsed = !isOpenSider && !media.isLg
-  useEffect(() => {
-    if (media.isLg) {
-      setIsOpenSider(false)
-    }
-  }, [media.isLg])
   return (
-    <div className="">
+    <div>
       <Head>
         <title>Chain Management - Kidshop</title>
       </Head>
       <main className="min-h-screen">
-        <Layout>
-          <Header className="flex fixed z-10 items-center min-h-nav-height w-full">
-            {isSiderCollapsed ? (
-              <FiMenu
-                onClick={() => setIsOpenSider(true)}
-                className="text-white mr-4 block lg:hidden opacity-75 -ml-8 cursor-pointer"
-                style={{ color: 'white' }}
-                size={32}
-              />
-            ) : (
-              <IoCloseSharp
-                onClick={() => setIsOpenSider(false)}
-                className="text-white mr-4 block lg:hidden opacity-75 -ml-8 cursor-pointer"
-                size={32}
-              />
-            )}
-
-            <span className="text-white font-logo hidden xs:inline text-md sm:text-xl md:text-2xl lg:text-3xl mr-4 whitespace-nowrap">
-              KidsShop
-            </span>
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              className="w-full -mr-6"
-              defaultSelectedKeys={['1']}
-            >
-              <Menu.Item key="1">Chuỗi</Menu.Item>
-              <Menu.Item key="2">Kinh doanh</Menu.Item>
-              <Menu.Item key="3">Cửa hàng</Menu.Item>
-              <Menu.Item key="4">Bán hàng</Menu.Item>
-              <Menu.Item key="5">Nguồn hàng</Menu.Item>
-              <Menu.Item key="6">Kho</Menu.Item>
-              <Menu.Item key="7" className="lg:pointer-events-none">
-                <div className="lg:hidden flex items-center gap-2 min-w-max">
-                  <IoLogOutOutline size={18} />
-                  Đăng xuất
-                </div>
-              </Menu.Item>
-            </Menu>
-            <div className="hidden lg:flex text-white items-center gap-2 min-w-max">
-              <IoLogOutOutline size={18} />
-              Đăng xuất
-            </div>
-          </Header>
-          <Layout className="">
-            <Sider
-              collapsedWidth="0"
-              collapsible
-              collapsed={isSiderCollapsed}
-              width={256}
-              className="pt-nav-height h-screen left-0 overflow-hidden"
-              style={{
-                position: 'fixed',
-              }}
-            >
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                style={{ height: '100%', borderRight: 0 }}
-              >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  icon={<NotificationOutlined />}
-                  title="subnav 3"
-                >
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </Sider>
-            <Layout
-              className={classNames(
-                { 'ml-slider-width': !isSiderCollapsed },
-                'p-4 md:p-6 mt-nav-height'
-              )}
-            >
-              <Content className="site-layout-background">
-                {true && text}
-              </Content>
-            </Layout>
-          </Layout>
-        </Layout>
+        <MainContainer nav="chain">
+          <Row>
+            <Title>Quản lý các chuỗi</Title>
+          </Row>
+          {text}
+        </MainContainer>
       </main>
     </div>
   )
