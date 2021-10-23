@@ -2,14 +2,14 @@ import Head from 'next/head'
 import { Typography } from 'antd'
 const { Title } = Typography
 
-export default function HomePage() {
+export default function BranchPage() {
   return (
     <div>
       <Head>
-        <title>Kidshop</title>
+        <title>Branches Management - Kidshop</title>
       </Head>
       <main>
-        <Title>Home Page</Title>
+        <Title>Branches management</Title>
       </main>
     </div>
   )
