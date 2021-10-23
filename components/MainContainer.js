@@ -29,7 +29,6 @@ const NAV_ITEMS = [
         name: 'Nhân viên',
         submenu: [
           {
-            route: 'list',
             name: 'Danh sách',
           },
           {
@@ -44,7 +43,6 @@ const NAV_ITEMS = [
         name: 'Các chi nhánh',
         submenu: [
           {
-            route: 'list',
             name: 'Danh sách',
           },
           {
@@ -59,7 +57,6 @@ const NAV_ITEMS = [
         name: 'Nhóm quyền',
         submenu: [
           {
-            route: 'list',
             name: 'Danh sách',
           },
           {
@@ -97,14 +94,12 @@ const NAV_ITEMS = [
   },
 ]
 
-export default function MainContainer({
-  children,
-  route = 'admin/employee/list',
-}) {
+export default function MainContainer({ children, route }) {
   const media = useResponsive()
   const [isOpenSider, setIsOpenSider] = useState(true)
   const isSiderCollapsed = !isOpenSider && !media.isLg
   const { navRoute, menuRoute, subMenuRoute } = routeObject(route)
+  console.log(routeObject(route))
   // TODO nav & menu items by role
   const navItems = NAV_ITEMS
   const menuItem = arrayGetItemByRoute(navItems, navRoute).menu
@@ -141,15 +136,16 @@ export default function MainContainer({
           mode="horizontal"
           className="w-full -mr-6"
           defaultSelectedKeys={[navRoute]}
+          onSelect
         >
           {navItems.map((navItem) => (
             <Menu.Item key={navItem.route}>{navItem.name}</Menu.Item>
           ))}
-          <Menu.Item key="logout" className="pointer-events-none">
+          <Menu.Item key="logout" className="lg:pointer-events-none">
             {!media.isLg && 'Đăng xuất'}
           </Menu.Item>
         </Menu>
-        <div className="hidden lg:flex text-white items-center gap-2 min-w-max">
+        <div className="hidden lg:flex text-white items-center gap-2 min-w-max cursor-pointer">
           <IoLogOutOutline size={18} />
           Đăng xuất
         </div>
@@ -158,9 +154,10 @@ export default function MainContainer({
         <Sider
           collapsedWidth="0"
           collapsible
+          theme="light"
           collapsed={isSiderCollapsed}
           width={256}
-          className="pt-nav-height h-screen left-0 overflow-hidden"
+          className="pt-nav-height h-screen left-0 overflow-x-hidden overflow-y-auto"
           style={{
             position: 'fixed',
           }}
@@ -168,12 +165,13 @@ export default function MainContainer({
           <Menu
             mode="inline"
             style={{ height: '100%', borderRight: 0 }}
-            defaultSelectedKeys={[subMenuRoute]}
-            defaultOpenKeys={[menuRoute]}
+            defaultSelectedKeys={[subMenuRoute || menuRoute || navRoute]}
+            defaultOpenKeys={[menuRoute || navRoute]}
           >
             <Menu.Item icon={<AiOutlineDashboard />} key={navRoute}>
               Bảng điều khiển
             </Menu.Item>
+            <Menu.Divider />
             {menuItem.map((menu) =>
               menu?.submenu ? (
                 <SubMenu

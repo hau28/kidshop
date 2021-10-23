@@ -1,3 +1,4 @@
 export const pathFromStrings = (...stringArr) => {
-  return stringArr.join('/')
+  const nonEmtpyStrings = stringArr.filter((s) => s)
+  return nonEmtpyStrings.join('/')
 }

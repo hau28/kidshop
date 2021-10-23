@@ -8,10 +8,10 @@ export default function ChainPage() {
   return (
     <div>
       <Head>
-        <title>Chain Management - Kidshop</title>
+        <title>Admin Space - Kidshop</title>
       </Head>
       <main className="min-h-screen">
-        <MainContainer nav="chain">
+        <MainContainer route="admin/config">
           <Row>
             <Title>Quản lý các chuỗi</Title>
           </Row>

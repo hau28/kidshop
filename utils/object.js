@@ -4,9 +4,12 @@ export const arrayGetItemByRoute = (arr, route, field) => {
 
 export const routeObject = (routeString) => {
   const routes = routeString.split('/')
+  const navRoute = routes[0]
+  const menuRoute = routes.slice(0, 2).join('/')
+  const subMenuRoute = routes.slice(0, 3).join('/')
   return {
-    navRoute: routes[0],
-    menuRoute: routes.slice(0, 2).join('/'),
-    subMenuRoute: routes.slice(0, 3).join('/'),
+    navRoute,
+    menuRoute: navRoute === menuRoute ? null : menuRoute,
+    subMenuRoute: menuRoute === subMenuRoute ? null : subMenuRoute,
   }
 }
